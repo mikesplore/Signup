@@ -20,6 +20,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,7 +38,11 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun Loginscreen(navController: NavController){
-   Column(modifier = Modifier
+    var email by remember{ mutableStateOf("") }
+    var password by remember{ mutableStateOf("") }
+
+
+    Column(modifier = Modifier
        .verticalScroll(rememberScrollState())
        .background(Color.Black)
        .fillMaxSize(),
@@ -62,7 +70,7 @@ fun Loginscreen(navController: NavController){
 
        Column(modifier = Modifier
            .background(Color.White, shape = RoundedCornerShape(topStart = 70.dp))
-           .height(650.dp)
+           .height(750.dp)
            .fillMaxWidth(),
 
            ){
@@ -89,8 +97,8 @@ fun Loginscreen(navController: NavController){
                horizontalAlignment = Alignment.CenterHorizontally,
                verticalArrangement = Arrangement.SpaceBetween){
                OutlinedTextField(
-                   value = "mikepremium8@gmail.com",
-                   onValueChange = { /*TODO*/ },
+                   value = email,
+                   onValueChange = { email = it },
                    label = { Text("Email", style = TextStyle(),
                        fontFamily = FontFamily.Monospace,
                        fontWeight = FontWeight.SemiBold,
@@ -115,8 +123,8 @@ fun Loginscreen(navController: NavController){
 
                )
                OutlinedTextField(
-                   value = "mikemike",
-                   onValueChange = { /*TODO*/ },
+                   value = password,
+                   onValueChange = { password = it },
                    label = { Text("Password", style = TextStyle(),
                        fontFamily = FontFamily.Monospace,
                        fontWeight = FontWeight.SemiBold,
@@ -166,11 +174,17 @@ Spacer(modifier = Modifier.height(30.dp))
            Box(modifier = Modifier
                .height(160.dp)
                .fillMaxWidth(), contentAlignment = Alignment.BottomCenter){
-               Text(text = "Don't have any account? Sign up",style = TextStyle(),
-                   fontFamily = FontFamily.Monospace,
-                   fontWeight = FontWeight.SemiBold,
-                   fontSize = 15.sp,
-                   color = Color.Black)
+               Button(onClick = { navController.navigate("login")},
+                   shape = RoundedCornerShape(10.dp),
+                   colors = ButtonDefaults.buttonColors(Color.Transparent)
+
+               ) {
+                   Text(text = "Already have an account? Sign In",style = TextStyle(),
+                       fontFamily = FontFamily.Monospace,
+                       fontWeight = FontWeight.SemiBold,
+                       fontSize = 15.sp,
+                       color = Color.Black)
+               }
            }
 
 
@@ -183,7 +197,7 @@ Spacer(modifier = Modifier.height(30.dp))
 }
 
 
-@Preview(heightDp = 800)
+@Preview
 @Composable
 fun Loginpreview(){
     Loginscreen(navController = rememberNavController())

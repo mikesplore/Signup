@@ -22,6 +22,11 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,6 +41,11 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun Signupscreen(navController: NavController){
+    var firstname by remember{ mutableStateOf("")}
+    var lastname by remember{ mutableStateOf("")}
+    var email by remember{ mutableStateOf("")}
+    var password by remember{ mutableStateOf("")}
+    var confirmpassword by remember{ mutableStateOf("")}
     Column(modifier = Modifier
         .background(Color.Black)
         .verticalScroll(rememberScrollState())
@@ -49,7 +59,7 @@ fun Signupscreen(navController: NavController){
                 horizontalArrangement = Arrangement.SpaceBetween) {
 
                 Button(
-                    onClick = { /* TODO: Handle button click */ },
+                    onClick = { navController.popBackStack() },
                     colors = ButtonDefaults.buttonColors(Color.Black)
                 ) {
                     Icon(
@@ -87,8 +97,8 @@ fun Signupscreen(navController: NavController){
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceBetween){
                 OutlinedTextField(
-                    value = "Michael",
-                    onValueChange = { /*TODO*/ },
+                    value = firstname,
+                    onValueChange = {  firstname = it},
                     label = { Text("First Name", style = TextStyle(),
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.SemiBold,
@@ -114,8 +124,8 @@ fun Signupscreen(navController: NavController){
 
                     )
                 OutlinedTextField(
-                    value = "Odhiambo",
-                    onValueChange = { /*TODO*/ },
+                    value = lastname,
+                    onValueChange = { lastname = it },
                     label = { Text("Last Name", style = TextStyle(),
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.SemiBold,
@@ -140,8 +150,8 @@ fun Signupscreen(navController: NavController){
 
                     )
                 OutlinedTextField(
-                    value = "mikepremium8@gmail.com",
-                    onValueChange = { /*TODO*/ },
+                    value = email,
+                    onValueChange = { email = it },
                     label = { Text("Email", style = TextStyle(),
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.SemiBold,
@@ -166,8 +176,8 @@ fun Signupscreen(navController: NavController){
 
                     )
                 OutlinedTextField(
-                    value = "mikemike",
-                    onValueChange = { /*TODO*/ },
+                    value = password,
+                    onValueChange = { password = it },
                     label = { Text("Password", style = TextStyle(),
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.SemiBold,
@@ -192,8 +202,8 @@ fun Signupscreen(navController: NavController){
 
                     )
                 OutlinedTextField(
-                    value = "mikemike",
-                    onValueChange = { /*TODO*/ },
+                    value = confirmpassword,
+                    onValueChange = { confirmpassword = it },
                     label = { Text("Confirm Password", style = TextStyle(),
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.SemiBold,
@@ -249,11 +259,18 @@ fun Signupscreen(navController: NavController){
             Box(modifier = Modifier
                 .height(170.dp)
                 .fillMaxWidth(), contentAlignment = Alignment.BottomCenter){
-                Text(text = "Already have an account? Sign In",style = TextStyle(),
-                    fontFamily = FontFamily.Monospace,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 15.sp,
-                    color = Color.Black)
+                Button(onClick = { navController.navigate("login")},
+                    shape = RoundedCornerShape(10.dp),
+                    colors = ButtonDefaults.buttonColors(Color.Transparent)
+
+                ) {
+                    Text(text = "Already have an account? Sign In",style = TextStyle(),
+                        fontFamily = FontFamily.Monospace,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 15.sp,
+                        color = Color.Black)
+                }
+
             }
 
 
