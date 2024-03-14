@@ -41,11 +41,11 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun Signupscreen(navController: NavController){
-    var firstname by remember{ mutableStateOf("")}
-    var lastname by remember{ mutableStateOf("")}
-    var email by remember{ mutableStateOf("")}
-    var password by remember{ mutableStateOf("")}
-    var confirmpassword by remember{ mutableStateOf("")}
+    var firstname by remember{ mutableStateOf("Mike")}
+    var lastname by remember{ mutableStateOf("Odhiambo")}
+    var email by remember{ mutableStateOf("mikepremium8@gmail.com")}
+    var password by remember{ mutableStateOf("mikemike")}
+    var confirmpassword by remember{ mutableStateOf("mikemike")}
     Column(modifier = Modifier
         .background(Color.Black)
         .verticalScroll(rememberScrollState())
@@ -91,7 +91,7 @@ fun Signupscreen(navController: NavController){
             Column (modifier = Modifier
 
                 .background(Color(0xfffafafa))
-                .height(360.dp)
+                .height(450.dp)
 
                 .width(350.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -234,31 +234,32 @@ fun Signupscreen(navController: NavController){
                     )
             }
 
-            Spacer(modifier = Modifier.height(30.dp))
-            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center){
-                Button(onClick = { navController.navigate("login") },
-                    modifier = Modifier
-                        .height(50.dp)
-                        .width(350.dp),
-
-                    shape = RoundedCornerShape(10.dp,0.dp,10.dp,10.dp)
 
 
-                    ,colors = ButtonDefaults.buttonColors(Color.Black)) {
-                    Text(text = "Sign Up", style = TextStyle(),
-                        fontFamily = FontFamily.Monospace,
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 15.sp,
-                        color = Color.White)
+            Column(modifier = Modifier
+                .height(150.dp)
+                .fillMaxWidth(), verticalArrangement = Arrangement.Bottom, horizontalAlignment = Alignment.CenterHorizontally){
+
+                Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center){
+                    Button(onClick = { navController.navigate("login") },
+                        modifier = Modifier
+                            .height(50.dp)
+                            .width(350.dp),
+
+                        shape = RoundedCornerShape(10.dp,0.dp,10.dp,10.dp)
+
+
+                        ,colors = ButtonDefaults.buttonColors(Color.Black)) {
+                        Text(text = "Sign Up", style = TextStyle(),
+                            fontFamily = FontFamily.Monospace,
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 15.sp,
+                            color = Color.White)
 
 
 
+                    }
                 }
-            }
-
-            Box(modifier = Modifier
-                .height(170.dp)
-                .fillMaxWidth(), contentAlignment = Alignment.BottomCenter){
                 Button(onClick = { navController.navigate("login")},
                     shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.buttonColors(Color.Transparent)
@@ -287,5 +288,10 @@ fun Signupscreen(navController: NavController){
 @Preview
 @Composable
 fun SignupPreview(){
+Loginscreen(navController = rememberNavController())}
+
+@Preview
+@Composable
+fun SignupPrevieww(){
     Signupscreen(navController = rememberNavController())
 }
