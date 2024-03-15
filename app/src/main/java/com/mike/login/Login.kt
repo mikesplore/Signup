@@ -1,6 +1,9 @@
 package com.mike.login
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,17 +38,21 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import kotlin.math.max
 
 @Composable
 fun Loginscreen(navController: NavController){
     var email by remember{ mutableStateOf("") }
     var password by remember{ mutableStateOf("") }
+    var nullEmail by remember { mutableStateOf(false)}
+    var nullPassword by remember { mutableStateOf(false)}
+
 
 
     Column(modifier = Modifier
-       .verticalScroll(rememberScrollState())
-       .background(Color.Black)
-       .fillMaxSize(),
+        .verticalScroll(rememberScrollState())
+        .background(Color.Black)
+        .fillMaxSize(),
        verticalArrangement = Arrangement.SpaceBetween) {
        Box(modifier = Modifier
            .height(200.dp)
@@ -56,6 +63,7 @@ fun Loginscreen(navController: NavController){
                    Color.White,
                    shape = RoundedCornerShape(topStart = 20.dp, 0.dp, 20.dp, 20.dp)
                )
+
                .size(100.dp),
                contentAlignment = Alignment.Center){
                Box(modifier = Modifier
@@ -91,14 +99,16 @@ fun Loginscreen(navController: NavController){
            Spacer(modifier = Modifier.height(50.dp))
            Column (modifier = Modifier
 
-               .background(Color(0xfffafafa))
-               .height(160.dp)
+               .background(Color(0xfffafafa), shape = RoundedCornerShape(10.dp))
+               .height(170.dp)
                .fillMaxWidth(),
                horizontalAlignment = Alignment.CenterHorizontally,
-               verticalArrangement = Arrangement.SpaceBetween){
+               verticalArrangement = Arrangement.SpaceAround){
                OutlinedTextField(
                    value = email,
-                   onValueChange = { email = it },
+                   onValueChange = {
+                       nullEmail = false
+                       email = it },
                    label = { Text("Email", style = TextStyle(),
                        fontFamily = FontFamily.Monospace,
                        fontWeight = FontWeight.SemiBold,
@@ -107,6 +117,7 @@ fun Loginscreen(navController: NavController){
                   ) },
                    modifier = Modifier
                        .width(350.dp),
+                   maxLines = 1,
                    shape = RoundedCornerShape(10.dp),
                    colors = TextFieldDefaults.colors(
                        focusedTextColor = Color.Black,
@@ -122,9 +133,19 @@ fun Loginscreen(navController: NavController){
 
 
                )
+               AnimatedVisibility(visible = nullEmail) {
+                   Text(text = "Email can't be empty", style = TextStyle(),
+                       fontWeight = FontWeight.Normal,
+                       fontFamily = FontFamily.SansSerif,
+                       fontSize = 15.sp,
+                       color = Color.Red)
+
+               }
                OutlinedTextField(
                    value = password,
-                   onValueChange = { password = it },
+                   onValueChange = {
+                        nullPassword = false
+                       password = it },
                    label = { Text("Password", style = TextStyle(),
                        fontFamily = FontFamily.Monospace,
                        fontWeight = FontWeight.SemiBold,
@@ -133,6 +154,7 @@ fun Loginscreen(navController: NavController){
                    ) },
                    modifier = Modifier
                        .width(350.dp),
+                   maxLines = 1,
                    shape = RoundedCornerShape(10.dp),
                    colors = TextFieldDefaults.colors(
                        focusedTextColor = Color.Black,
@@ -147,11 +169,35 @@ fun Loginscreen(navController: NavController){
 
 
                    )
+               AnimatedVisibility(visible = nullPassword) {
+                   Text(text = "Password can't be empty", style = TextStyle(),
+                       fontWeight = FontWeight.Normal,
+                       fontFamily = FontFamily.SansSerif,
+                       fontSize = 15.sp,
+                       color = Color.Red)
+
+               }
            }
 
 Spacer(modifier = Modifier.height(30.dp))
            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center){
-               Button(onClick = { navController.navigate("signup") },
+               Button(onClick = {
+                   if (password.isEmpty()) {
+                       nullPassword = true;
+                   } else {
+                       nullPassword = false;
+                   }
+
+                   nullEmail = if (email.isEmpty()) {
+                       true;
+                   } else {
+                       false;
+                   }
+
+                   if (!nullPassword && !nullEmail) {
+                       navController.navigate("signup");
+                   }},
+
                    modifier = Modifier
                        .height(50.dp)
                        .width(350.dp),
@@ -167,24 +213,29 @@ Spacer(modifier = Modifier.height(30.dp))
                        color = Color.White)
 
 
-                   
+
                }
            }
 
-           Box(modifier = Modifier
-               .height(160.dp)
-               .fillMaxWidth(), contentAlignment = Alignment.BottomCenter){
-               Button(onClick = { navController.navigate("login")},
-                   shape = RoundedCornerShape(10.dp),
-                   colors = ButtonDefaults.buttonColors(Color.Transparent)
 
-               ) {
-                   Text(text = "Already have an account? Sign In",style = TextStyle(),
-                       fontFamily = FontFamily.Monospace,
-                       fontWeight = FontWeight.SemiBold,
-                       fontSize = 15.sp,
-                       color = Color.Black)
-               }
+           Row(modifier = Modifier
+               .fillMaxWidth()
+               .height(170.dp),
+               horizontalArrangement = Arrangement.Center,
+               verticalAlignment = Alignment.Bottom) {
+               Text(text = "Dont have an Account?",style = TextStyle(),
+                   fontFamily = FontFamily.SansSerif,
+                   fontWeight = FontWeight.Normal,
+                   color = Color.Black,
+                   )
+               Text(text = " Sign Up",
+                   style = TextStyle(),
+                   fontFamily = FontFamily.SansSerif,
+                   fontWeight = FontWeight.SemiBold,
+                   color = Color.Black,
+                   modifier = Modifier.clickable { navController.navigate("signup") }
+              )
+
            }
 
 

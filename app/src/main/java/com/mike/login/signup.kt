@@ -1,6 +1,9 @@
 package com.mike.login
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -38,14 +41,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import kotlin.math.ln
+import kotlin.math.truncate
 
 @Composable
 fun Signupscreen(navController: NavController){
-    var firstname by remember{ mutableStateOf("Mike")}
-    var lastname by remember{ mutableStateOf("Odhiambo")}
-    var email by remember{ mutableStateOf("mikepremium8@gmail.com")}
-    var password by remember{ mutableStateOf("mikemike")}
-    var confirmpassword by remember{ mutableStateOf("mikemike")}
+    var firstname by remember{ mutableStateOf("")}
+    var lastname by remember{ mutableStateOf("")}
+    var email by remember{ mutableStateOf("")}
+    var password by remember{ mutableStateOf("")}
+    var confirmpassword by remember{ mutableStateOf("")}
+    var fnError by remember { mutableStateOf(false)}
+    var lnError by remember { mutableStateOf(false)}
+    var nullEmail by remember { mutableStateOf(false)}
+    var pError by remember { mutableStateOf(false)}
+    var cpError by remember { mutableStateOf(false)}
+    var errormsg by remember { mutableStateOf("Field cant b empty")}
+
     Column(modifier = Modifier
         .background(Color.Black)
         .verticalScroll(rememberScrollState())
@@ -56,8 +68,10 @@ fun Signupscreen(navController: NavController){
             .fillMaxWidth(),
             contentAlignment = Alignment.Center){
             Row(modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween) {
+                horizontalArrangement = Arrangement.Center) {
+Column {
 
+    }
                 Button(
                     onClick = { navController.popBackStack() },
                     colors = ButtonDefaults.buttonColors(Color.Black)
@@ -67,14 +81,18 @@ fun Signupscreen(navController: NavController){
                         contentDescription = "Back Arrow",
                         tint = Color.White // Set the color of the arrow icon to white
                     )
+                    
                 }
+                Box(modifier = Modifier.width(70.dp))
+
                 Text(text = "Sign Up",style = TextStyle(),
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.Monospace,
                     color = Color.White
                 )
-                Box(modifier = Modifier.width(50.dp))
+                Box(modifier = Modifier.width(120.dp))
+
             }
 
         }
@@ -90,15 +108,17 @@ fun Signupscreen(navController: NavController){
             Spacer(modifier = Modifier.height(35.dp))
             Column (modifier = Modifier
 
-                .background(Color(0xfffafafa))
-                .height(450.dp)
+                .background(Color(0xfffafafa), shape = RoundedCornerShape(10.dp))
+                .height(420.dp)
 
                 .width(350.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceBetween){
+                ){
                 OutlinedTextField(
                     value = firstname,
-                    onValueChange = {  firstname = it},
+                    onValueChange = {
+                        fnError = false
+                        firstname = it},
                     label = { Text("First Name", style = TextStyle(),
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.SemiBold,
@@ -108,6 +128,7 @@ fun Signupscreen(navController: NavController){
                     modifier = Modifier
 
                         .width(350.dp),
+                    maxLines = 1,
                     shape = RoundedCornerShape(10.dp),
                     colors = TextFieldDefaults.colors(
                         focusedTextColor = Color.Black,
@@ -123,9 +144,19 @@ fun Signupscreen(navController: NavController){
 
 
                     )
+                AnimatedVisibility(visible = fnError) {
+                    Text(text = "First Name can't be empty", style = TextStyle(),
+                        fontWeight = FontWeight.Normal,
+                        fontFamily = FontFamily.SansSerif,
+                        fontSize = 15.sp,
+                        color = Color.Red)
+                    
+                }
                 OutlinedTextField(
                     value = lastname,
-                    onValueChange = { lastname = it },
+                    onValueChange = {
+                        lnError = false
+                        lastname = it },
                     label = { Text("Last Name", style = TextStyle(),
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.SemiBold,
@@ -134,6 +165,7 @@ fun Signupscreen(navController: NavController){
                     ) },
                     modifier = Modifier
                         .width(350.dp),
+                    maxLines = 1,
                     shape = RoundedCornerShape(10.dp),
                     colors = TextFieldDefaults.colors(
                         focusedTextColor = Color.Black,
@@ -149,9 +181,19 @@ fun Signupscreen(navController: NavController){
 
 
                     )
+                AnimatedVisibility(visible = lnError) {
+                    Text(text = "last Name can't be empty", style = TextStyle(),
+                        fontWeight = FontWeight.Normal,
+                        fontFamily = FontFamily.SansSerif,
+                        fontSize = 15.sp,
+                        color = Color.Red)
+
+                }
                 OutlinedTextField(
                     value = email,
-                    onValueChange = { email = it },
+                    onValueChange = {
+                        nullEmail = false
+                        email = it },
                     label = { Text("Email", style = TextStyle(),
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.SemiBold,
@@ -160,6 +202,7 @@ fun Signupscreen(navController: NavController){
                     ) },
                     modifier = Modifier
                         .width(350.dp),
+                    maxLines = 1,
                     shape = RoundedCornerShape(10.dp),
                     colors = TextFieldDefaults.colors(
                         focusedTextColor = Color.Black,
@@ -175,9 +218,19 @@ fun Signupscreen(navController: NavController){
 
 
                     )
+                AnimatedVisibility(visible = nullEmail) {
+                    Text(text = "Email can't be empty", style = TextStyle(),
+                        fontWeight = FontWeight.Normal,
+                        fontFamily = FontFamily.SansSerif,
+                        fontSize = 15.sp,
+                        color = Color.Red)
+
+                }
                 OutlinedTextField(
                     value = password,
-                    onValueChange = { password = it },
+                    onValueChange = {
+                        pError = false
+                        password = it },
                     label = { Text("Password", style = TextStyle(),
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.SemiBold,
@@ -186,6 +239,7 @@ fun Signupscreen(navController: NavController){
                     ) },
                     modifier = Modifier
                         .width(350.dp),
+                    maxLines = 1,
                     shape = RoundedCornerShape(10.dp),
                     colors = TextFieldDefaults.colors(
                         focusedTextColor = Color.Black,
@@ -201,9 +255,20 @@ fun Signupscreen(navController: NavController){
 
 
                     )
+                AnimatedVisibility(visible = pError) {
+                    Text(text = "Password can't be empty", style = TextStyle(),
+                        fontWeight = FontWeight.Normal,
+                        fontFamily = FontFamily.SansSerif,
+                        fontSize = 15.sp,
+                        color = Color.Red)
+
+                }
+                var errormsg by remember { mutableStateOf("Password not matching")}
                 OutlinedTextField(
                     value = confirmpassword,
-                    onValueChange = { confirmpassword = it },
+                    onValueChange = {
+                        cpError = false
+                        confirmpassword = it },
                     label = { Text("Confirm Password", style = TextStyle(),
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.SemiBold,
@@ -213,6 +278,7 @@ fun Signupscreen(navController: NavController){
                     modifier = Modifier
                         .width(350.dp),
                     shape = RoundedCornerShape(10.dp),
+                    maxLines = 1,
                     colors = TextFieldDefaults.colors(
                         focusedTextColor = Color.Black,
                         unfocusedTextColor = Color.Gray,
@@ -221,17 +287,17 @@ fun Signupscreen(navController: NavController){
                         unfocusedLabelColor = Color.Black,
                         focusedIndicatorColor = Color.Black,
                         unfocusedIndicatorColor = Color.Transparent,
-
-
-
-
-
-
-
                         ),
 
-
                     )
+                AnimatedVisibility(visible = cpError) {
+                    Text(text = errormsg, style = TextStyle(),
+                        fontWeight = FontWeight.Normal,
+                        fontFamily = FontFamily.SansSerif,
+                        fontSize = 15.sp,
+                        color = Color.Red)
+
+                }
             }
 
 
@@ -241,7 +307,47 @@ fun Signupscreen(navController: NavController){
                 .fillMaxWidth(), verticalArrangement = Arrangement.Bottom, horizontalAlignment = Alignment.CenterHorizontally){
 
                 Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center){
-                    Button(onClick = { navController.navigate("login") },
+                    Button(onClick = {
+                        if (password.isEmpty()) {
+                            pError = true;
+                        } else {
+                            pError = false;
+                        }
+
+                        if (confirmpassword.isEmpty()) {
+                            cpError = true;
+                        } else {
+                            cpError = false;
+                        }
+                        if (password != confirmpassword) {
+                            errormsg = "Password not Matching";
+                            cpError = true
+                        } else {
+                            cpError = false;
+                        }
+
+                        if (firstname.isEmpty()) {
+                            fnError = true;
+                        } else {
+                            fnError = false;
+                        }
+                        if (lastname.isEmpty()) {
+                            lnError = true;
+                        } else {
+                            lnError = false;
+                        }
+
+                        nullEmail = if (email.isEmpty()) {
+                            true;
+                        } else {
+                            false;
+                        }
+
+                        if (!pError && !nullEmail && !fnError && cpError &&lnError) {
+                            navController.navigate("signup");
+                        }
+
+                    },
                         modifier = Modifier
                             .height(50.dp)
                             .width(350.dp),
@@ -260,16 +366,24 @@ fun Signupscreen(navController: NavController){
 
                     }
                 }
-                Button(onClick = { navController.navigate("login")},
-                    shape = RoundedCornerShape(10.dp),
-                    colors = ButtonDefaults.buttonColors(Color.Transparent)
-
-                ) {
-                    Text(text = "Already have an account? Sign In",style = TextStyle(),
-                        fontFamily = FontFamily.Monospace,
+                Row(modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.Bottom) {
+                    Text(text = "Already have an Account?",style = TextStyle(),
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Normal,
+                        color = Color.Black,
+                    )
+                    Text(text = " Sign In",
+                        style = TextStyle(),
+                        fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.SemiBold,
-                        fontSize = 15.sp,
-                        color = Color.Black)
+                        color = Color.Black,
+                        modifier = Modifier.clickable { navController.navigate("login") }
+                    )
+
                 }
 
             }
@@ -287,11 +401,6 @@ fun Signupscreen(navController: NavController){
 
 @Preview
 @Composable
-fun SignupPreview(){
-Loginscreen(navController = rememberNavController())}
-
-@Preview
-@Composable
-fun SignupPrevieww(){
+fun SignupPreview() {
     Signupscreen(navController = rememberNavController())
 }
