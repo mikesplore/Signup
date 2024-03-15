@@ -31,7 +31,9 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -91,24 +93,27 @@ fun Avatars(){
                 .width(300.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceEvenly){
-                Box(modifier = Modifier
-                    .background(Color(0xffffffff), shape = CircleShape)
-                    .size(130.dp)
+                Box(
+                    modifier = Modifier
+                        .size(130.dp)
+                        .background(Color.White, shape = CircleShape)
+                        .border(3.dp, color = Color.White, shape = CircleShape),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.pic),
+                        contentDescription = "profile",
+                        modifier = Modifier
+                            .size(120.dp)
+                            .clip(shape = CircleShape)
 
-                    .border(3.dp, color = Color.White, shape = CircleShape),
-                    contentAlignment = Alignment.Center){
-                    Text(text = "M",
-                        style = TextStyle(),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 100.sp,
-                        color = Color.Black
-                   )
+                    )
                 }
-                Column {
+                Column (horizontalAlignment = Alignment.CenterHorizontally){
                     Text(text = "Michael Odhiambo", style = TextStyle(),
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White)
-                    Text(text = "Junior Programmer", style = TextStyle(),
+                    Text(text = "Junior Android Developer", style = TextStyle(),
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White)
                 }
@@ -121,7 +126,11 @@ fun Avatars(){
                     Text(text = "1000 followers", style = TextStyle(),
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White)
-                    Spacer(modifier = Modifier.width(20.dp))
+                    Spacer(modifier = Modifier.width(10.dp))
+                    Divider(color = Color.White,modifier = Modifier
+                        .width(1.dp).height(20.dp))
+                    Spacer(modifier = Modifier.width(10.dp))
+
                     Text(text = "1200 following", style = TextStyle(),
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White)
