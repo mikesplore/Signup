@@ -344,7 +344,7 @@ Column {
                         }
 
                         if (!pError && !nullEmail && !fnError && cpError &&lnError) {
-                            navController.navigate("signup");
+                            navController.navigate("profile");
                         }
 
                     },
