@@ -343,7 +343,7 @@ Column {
                             false;
                         }
 
-                        if (!pError && !nullEmail && !fnError && cpError &&lnError) {
+                        if (!pError && !nullEmail && !fnError && !cpError && !lnError) {
                             navController.navigate("profile");
                         }
 
