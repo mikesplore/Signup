@@ -79,7 +79,7 @@ Column {
                     Icon(
                         Icons.Default.ArrowBack,
                         contentDescription = "Back Arrow",
-                        tint = Color.White // Set the color of the arrow icon to white
+                        tint = Color.White
                     )
                     
                 }

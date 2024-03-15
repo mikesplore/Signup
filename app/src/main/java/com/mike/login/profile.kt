@@ -113,7 +113,7 @@ fun Avatars(){
                     Text(text = "Michael Odhiambo", style = TextStyle(),
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White)
-                    Text(text = "Junior Android Developer", style = TextStyle(),
+                    Text(text = "Android Developer", style = TextStyle(),
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White)
                 }
@@ -149,12 +149,12 @@ fun Avatars(){
                     .height(50.dp)
                     .fillMaxWidth(),
                     verticalArrangement = Arrangement.SpaceBetween) {
-                    Text(text = "Email", style = TextStyle(),
+                    Text(text = " Email", style = TextStyle(),
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Normal,
                         fontFamily = FontFamily.SansSerif
                     )
-                    Text(text = "Mikepremium8@gmail.com", style = TextStyle(),
+                    Text(text = " mikepremium8@gmail.com", style = TextStyle(),
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Normal,
                         fontFamily = FontFamily.SansSerif
@@ -191,7 +191,9 @@ fun Avatars(){
             Row (modifier = Modifier.height(80.dp)){
                 Spacer(modifier = Modifier.width(25.dp))
                 Image(painter = painterResource(id = x),
-                    contentDescription ="x(Twitter",modifier = Modifier.size(25.dp) )
+                    contentDescription ="x(Twitter",modifier = Modifier
+                        .absolutePadding(0.dp,5.dp)
+                        .size(25.dp) )
                 Column(modifier = Modifier
                     .height(50.dp)
                     .fillMaxWidth(),
@@ -201,7 +203,7 @@ fun Avatars(){
                         fontWeight = FontWeight.Normal,
                         fontFamily = FontFamily.SansSerif
                     )
-                    Text(text = "@mikesplore", style = TextStyle(),
+                    Text(text = " @mikesplore", style = TextStyle(),
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Normal,
                         fontFamily = FontFamily.SansSerif
@@ -225,7 +227,7 @@ fun Avatars(){
                         fontWeight = FontWeight.Normal,
                         fontFamily = FontFamily.SansSerif
                     )
-                    Text(text = "mikesplore", style = TextStyle(),
+                    Text(text = "@mikesplore", style = TextStyle(),
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Normal,
                         fontFamily = FontFamily.SansSerif
@@ -239,7 +241,9 @@ fun Avatars(){
             Row (modifier = Modifier.height(80.dp)){
                 Spacer(modifier = Modifier.width(25.dp))
                 Image(painter = painterResource(id = R.drawable.fb),
-                    contentDescription ="Instagram",modifier = Modifier.size(30.dp) )
+                    contentDescription ="Instagram",modifier = Modifier
+                        .absolutePadding(0.dp,5.dp)
+                        .size(30.dp) )
                 Column(modifier = Modifier
                     .height(50.dp)
                     .fillMaxWidth(),
