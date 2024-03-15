@@ -53,7 +53,6 @@ fun Profile(navController: NavController){
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
 
-
         ) {
 
             Row (modifier = Modifier
@@ -280,7 +279,6 @@ fun Profile(navController: NavController){
         }
 
     }
-
 
 }
 
