@@ -118,7 +118,7 @@ fun Profile(navController: NavController){
                     .height(50.dp)
                     .fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center){
-                    Text(text = "1000 followers", style = TextStyle(),
+                    Text(text = "1000 Followers", style = TextStyle(),
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White)
                     Spacer(modifier = Modifier.width(10.dp))
@@ -127,7 +127,7 @@ fun Profile(navController: NavController){
                         .height(20.dp))
                     Spacer(modifier = Modifier.width(10.dp))
 
-                    Text(text = "1200 following", style = TextStyle(),
+                    Text(text = "1200 Following", style = TextStyle(),
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White)
 
