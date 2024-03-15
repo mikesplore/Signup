@@ -22,18 +22,13 @@ import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarColors
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -41,11 +36,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.mike.login.R.drawable.x
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Avatars(){
+fun Profile(navController: NavController){
     Column(modifier = Modifier
         .background(Color.White)
         .fillMaxSize()) {
@@ -128,7 +124,8 @@ fun Avatars(){
                         color = Color.White)
                     Spacer(modifier = Modifier.width(10.dp))
                     Divider(color = Color.White,modifier = Modifier
-                        .width(1.dp).height(20.dp))
+                        .width(1.dp)
+                        .height(20.dp))
                     Spacer(modifier = Modifier.width(10.dp))
 
                     Text(text = "1200 following", style = TextStyle(),
@@ -192,7 +189,7 @@ fun Avatars(){
                 Spacer(modifier = Modifier.width(25.dp))
                 Image(painter = painterResource(id = x),
                     contentDescription ="x(Twitter",modifier = Modifier
-                        .absolutePadding(0.dp,5.dp)
+                        .absolutePadding(0.dp, 5.dp)
                         .size(25.dp) )
                 Column(modifier = Modifier
                     .height(50.dp)
@@ -242,7 +239,7 @@ fun Avatars(){
                 Spacer(modifier = Modifier.width(25.dp))
                 Image(painter = painterResource(id = R.drawable.fb),
                     contentDescription ="Instagram",modifier = Modifier
-                        .absolutePadding(0.dp,5.dp)
+                        .absolutePadding(0.dp, 5.dp)
                         .size(30.dp) )
                 Column(modifier = Modifier
                     .height(50.dp)
@@ -289,6 +286,6 @@ fun Avatars(){
 
 @Preview
 @Composable
-fun AvatarsPreview(){
-Avatars()
+fun ProfilePreview(){
+Profile(rememberNavController())
 }
