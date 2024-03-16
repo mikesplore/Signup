@@ -47,21 +47,21 @@ import com.mike.login.R.drawable.x
 fun Profile(navController: NavController){
     val profilecustomBrush = Brush.horizontalGradient(
         colors = listOf(
-            Color(0xFF008DDA), // 0486d1
-            Color(0xff1D24CA), // 42adeb
             Color(0xff008DDA),
-            // a3bad1
+            Color(0xff1D24CA),
+            Color(0xff6200EA),
+            Color(0xffA100FF)
+
         )
 
     )
 
     val backcustomBrush = Brush.linearGradient(
         colors = listOf(
-            Color(0xff008DDA), // 0486d1
-            Color(0xff1D24CA), // 42adeb
-            Color(0xff67C6E3),
-            Color(0xff008DDA), // 0486d1
-            Color(0xff1D24CA)// a3bad1
+            Color(0xff008DDA),
+            Color(0xff1D24CA),
+            Color(0xff6200EA),
+            Color(0xffA100FF)
         )
     )
     Column(modifier = Modifier
@@ -186,7 +186,7 @@ fun Profile(navController: NavController){
 
             Row (modifier = Modifier.height(80.dp)){
                 Spacer(modifier = Modifier.width(25.dp))
-                Icon(imageVector = Icons.Default.Person, contentDescription = "Name",modifier = Modifier.size(30.dp))
+                Icon(imageVector = Icons.Default.Person, contentDescription = "Name",modifier = Modifier.size(30.dp), tint = Color.White)
                 Column(modifier = Modifier
                     .height(50.dp)
                     .fillMaxWidth(),
@@ -194,12 +194,14 @@ fun Profile(navController: NavController){
                     Text(text = "Name", style = TextStyle(),
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Normal,
-                        fontFamily = FontFamily.SansSerif
+                        fontFamily = FontFamily.SansSerif,
+                        color = Color.White
                     )
                     Text(text = "Michael Odhiambo", style = TextStyle(),
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Normal,
-                        fontFamily = FontFamily.SansSerif
+                        fontFamily = FontFamily.SansSerif,
+                        color = Color.White
                     )
                 }
 
@@ -209,7 +211,7 @@ fun Profile(navController: NavController){
 
             Row (modifier = Modifier.height(80.dp)){
                 Spacer(modifier = Modifier.width(25.dp))
-                Icon(imageVector = Icons.Default.Email, contentDescription = "email",modifier = Modifier.size(30.dp))
+                Icon(imageVector = Icons.Default.Email, contentDescription = "email",modifier = Modifier.size(30.dp),tint = Color.White)
                 Column(modifier = Modifier
                     .height(50.dp)
                     .fillMaxWidth(),
@@ -217,12 +219,14 @@ fun Profile(navController: NavController){
                     Text(text = " Email", style = TextStyle(),
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Normal,
-                        fontFamily = FontFamily.SansSerif
+                        fontFamily = FontFamily.SansSerif,
+                        color = Color.White
                     )
                     Text(text = " mikepremium8@gmail.com", style = TextStyle(),
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Normal,
-                        fontFamily = FontFamily.SansSerif
+                        fontFamily = FontFamily.SansSerif,
+                        color = Color.White
                     )
                 }
 
@@ -232,7 +236,7 @@ fun Profile(navController: NavController){
 
             Row (modifier = Modifier.height(80.dp)){
                 Spacer(modifier = Modifier.width(25.dp))
-                Icon(imageVector = Icons.Default.Call, contentDescription = "Phone",modifier = Modifier.size(30.dp))
+                Icon(imageVector = Icons.Default.Call, contentDescription = "Phone",modifier = Modifier.size(30.dp),tint = Color.White)
                 Column(modifier = Modifier
                     .height(50.dp)
                     .fillMaxWidth(),
@@ -240,12 +244,14 @@ fun Profile(navController: NavController){
                     Text(text = "Phone", style = TextStyle(),
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Normal,
-                        fontFamily = FontFamily.SansSerif
+                        fontFamily = FontFamily.SansSerif,
+                        color = Color.White
                    )
                     Text(text = "+254799013845", style = TextStyle(),
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Normal,
-                        fontFamily = FontFamily.SansSerif
+                        fontFamily = FontFamily.SansSerif,
+                        color = Color.White
                     )
                 }
 
@@ -266,12 +272,16 @@ fun Profile(navController: NavController){
                     Text(text = "(Twitter)", style = TextStyle(),
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Normal,
-                        fontFamily = FontFamily.SansSerif
+                        fontFamily = FontFamily.SansSerif,
+                        color = Color.White
+                        
                     )
                     Text(text = " @mikesplore", style = TextStyle(),
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Normal,
-                        fontFamily = FontFamily.SansSerif
+                        fontFamily = FontFamily.SansSerif,
+                        color = Color.White
+
                     )
                 }
 
@@ -290,12 +300,16 @@ fun Profile(navController: NavController){
                     Text(text = "Instagram", style = TextStyle(),
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Normal,
-                        fontFamily = FontFamily.SansSerif
+                        fontFamily = FontFamily.SansSerif,
+                        color = Color.White
+                        
                     )
                     Text(text = "@mikesplore", style = TextStyle(),
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Normal,
-                        fontFamily = FontFamily.SansSerif
+                        fontFamily = FontFamily.SansSerif,
+                        color = Color.White
+
                     )
                 }
 
@@ -316,12 +330,16 @@ fun Profile(navController: NavController){
                     Text(text = "  Facebook", style = TextStyle(),
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Normal,
-                        fontFamily = FontFamily.SansSerif
+                        fontFamily = FontFamily.SansSerif,
+                        color = Color.White
+
                     )
                     Text(text = "  Mike Mike", style = TextStyle(),
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Normal,
-                        fontFamily = FontFamily.SansSerif
+                        fontFamily = FontFamily.SansSerif,
+                        color = Color.White
+                        
                     )
                 }
 

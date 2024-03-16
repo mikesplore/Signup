@@ -1,12 +1,11 @@
 package com.mike.login
 
 import android.annotation.SuppressLint
-import android.graphics.drawable.Icon
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,7 +27,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
-
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            MyScreens()
+        }
+    }
+}
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MyScreens() {
@@ -39,18 +45,27 @@ fun MyScreens() {
         bottomBar = {
             AnimatedVisibility(visible = true) {
 
-
             BottomAppBar {
                 Row (modifier = Modifier
                     .height(50.dp)
                     .fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceEvenly){
-                    Icon(imageVector = Icons.Default.Home, contentDescription ="Home" ,modifier = Modifier.size(40.dp))
-                    Icon(imageVector = Icons.Default.Build, contentDescription ="Home" ,modifier = Modifier.size(40.dp))
-                    Icon(imageVector = Icons.Default.Person, contentDescription ="Home" ,modifier = Modifier.size(40.dp))
+                    Icon(imageVector = Icons.Default.Home, contentDescription ="Home" ,
+                        modifier = Modifier
+                            .clickable { navController.navigate("login") }
+                            .size(40.dp))
+                    Icon(imageVector = Icons.Default.Build, contentDescription ="Home" ,
+                        modifier = Modifier
+                            .clickable { navController.navigate("signup") }
+                            .size(40.dp))
+                    Icon(imageVector = Icons.Default.Person, contentDescription ="Home" ,
+                        modifier = Modifier
+                            .clickable { navController.navigate("profile") }
+                            .size(40.dp))
 
                 }
+
 
             }
 
