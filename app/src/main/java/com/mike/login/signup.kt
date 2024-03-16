@@ -30,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -42,6 +43,7 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun Signupscreen(navController: NavController){
+    GlobalVariables.visible.value = false
     var firstname by remember{ mutableStateOf("")}
     var lastname by remember{ mutableStateOf("")}
     var email by remember{ mutableStateOf("")}
@@ -54,8 +56,29 @@ fun Signupscreen(navController: NavController){
     var cpError by remember { mutableStateOf(false)}
     var errormsg by remember { mutableStateOf("Field cant b empty")}
 
+    val upperbrush = Brush.linearGradient(
+        colors = listOf(
+            Color(0xff008DDA),
+            Color(0xff1D24CA),
+            Color(0xff6200EA),
+            Color(0xffA100FF)
+
+        )
+    )
+
+    val lowerbrush = Brush.horizontalGradient(
+        colors = listOf(
+            Color(0xff008DDA),
+            Color(0xff1D24CA),
+            Color(0xff6200EA),
+            Color(0xffA100FF)
+
+
+        )
+    )
+
     Column(modifier = Modifier
-        .background(Color.Black)
+        .background(brush = upperbrush)
         .verticalScroll(rememberScrollState())
         .fillMaxSize(),
         verticalArrangement = Arrangement.Top) {
@@ -65,12 +88,10 @@ fun Signupscreen(navController: NavController){
             contentAlignment = Alignment.Center){
             Row(modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center) {
-Column {
 
-    }
                 Button(
                     onClick = { navController.popBackStack() },
-                    colors = ButtonDefaults.buttonColors(Color.Black)
+                    colors = ButtonDefaults.buttonColors(Color.Transparent)
                 ) {
                     Icon(
                         Icons.Default.ArrowBack,
@@ -94,7 +115,7 @@ Column {
         }
 
         Column(modifier = Modifier
-            .background(Color.White, shape = RoundedCornerShape(topStart = 70.dp))
+            .background(brush = lowerbrush, shape = RoundedCornerShape(topStart = 70.dp))
             .height(750.dp)
             .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -104,7 +125,7 @@ Column {
             Spacer(modifier = Modifier.height(35.dp))
             Column (modifier = Modifier
 
-                .background(Color(0xfffafafa), shape = RoundedCornerShape(10.dp))
+                .background(brush = upperbrush, shape = RoundedCornerShape(10.dp))
                 .height(420.dp)
 
                 .width(350.dp),
@@ -117,7 +138,7 @@ Column {
                         firstname = it},
                     label = { Text("First Name", style = TextStyle(),
                         fontFamily = FontFamily.Monospace,
-                        fontWeight = FontWeight.SemiBold,
+                        fontWeight = FontWeight.Normal,
                         fontSize = 15.sp,
                         color = Color.Black
                     ) },
@@ -128,9 +149,9 @@ Column {
                     shape = RoundedCornerShape(10.dp),
                     colors = TextFieldDefaults.colors(
                         focusedTextColor = Color.Black,
-                        unfocusedTextColor = Color.Gray,
-                        focusedContainerColor = Color.White,
-                        unfocusedContainerColor = Color.White,
+                        unfocusedTextColor = Color(0xff1D24CA),
+                        focusedContainerColor = Color(0xff008DDA),
+                        unfocusedContainerColor = Color(0xff008DDA),
                         unfocusedLabelColor = Color.Black,
                         focusedIndicatorColor = Color.Black,
                         unfocusedIndicatorColor = Color.Transparent,
@@ -155,7 +176,7 @@ Column {
                         lastname = it },
                     label = { Text("Last Name", style = TextStyle(),
                         fontFamily = FontFamily.Monospace,
-                        fontWeight = FontWeight.SemiBold,
+                        fontWeight = FontWeight.Normal,
                         fontSize = 15.sp,
                         color = Color.Black
                     ) },
@@ -165,9 +186,9 @@ Column {
                     shape = RoundedCornerShape(10.dp),
                     colors = TextFieldDefaults.colors(
                         focusedTextColor = Color.Black,
-                        unfocusedTextColor = Color.Gray,
-                        focusedContainerColor = Color.White,
-                        unfocusedContainerColor = Color.White,
+                        unfocusedTextColor = Color(0xff1D24CA),
+                        focusedContainerColor = Color(0xff008DDA),
+                        unfocusedContainerColor = Color(0xff008DDA),
                         unfocusedLabelColor = Color.Black,
                         focusedIndicatorColor = Color.Black,
                         unfocusedIndicatorColor = Color.Transparent,
@@ -192,7 +213,7 @@ Column {
                         email = it },
                     label = { Text("Email", style = TextStyle(),
                         fontFamily = FontFamily.Monospace,
-                        fontWeight = FontWeight.SemiBold,
+                        fontWeight = FontWeight.Normal,
                         fontSize = 15.sp,
                         color = Color.Black
                     ) },
@@ -202,9 +223,9 @@ Column {
                     shape = RoundedCornerShape(10.dp),
                     colors = TextFieldDefaults.colors(
                         focusedTextColor = Color.Black,
-                        unfocusedTextColor = Color.Gray,
-                        focusedContainerColor = Color.White,
-                        unfocusedContainerColor = Color.White,
+                        unfocusedTextColor = Color(0xff1D24CA),
+                        focusedContainerColor = Color(0xff008DDA),
+                        unfocusedContainerColor = Color(0xff008DDA),
                         unfocusedLabelColor = Color.Black,
                         focusedIndicatorColor = Color.Black,
                         unfocusedIndicatorColor = Color.Transparent,
@@ -229,7 +250,7 @@ Column {
                         password = it },
                     label = { Text("Password", style = TextStyle(),
                         fontFamily = FontFamily.Monospace,
-                        fontWeight = FontWeight.SemiBold,
+                        fontWeight = FontWeight.Normal,
                         fontSize = 15.sp,
                         color = Color.Black
                     ) },
@@ -239,9 +260,9 @@ Column {
                     shape = RoundedCornerShape(10.dp),
                     colors = TextFieldDefaults.colors(
                         focusedTextColor = Color.Black,
-                        unfocusedTextColor = Color.Gray,
-                        focusedContainerColor = Color.White,
-                        unfocusedContainerColor = Color.White,
+                        unfocusedTextColor = Color(0xff1D24CA),
+                        focusedContainerColor = Color(0xff008DDA),
+                        unfocusedContainerColor = Color(0xff008DDA),
                         unfocusedLabelColor = Color.Black,
                         focusedIndicatorColor = Color.Black,
                         unfocusedIndicatorColor = Color.Transparent,
@@ -267,7 +288,7 @@ Column {
                         confirmpassword = it },
                     label = { Text("Confirm Password", style = TextStyle(),
                         fontFamily = FontFamily.Monospace,
-                        fontWeight = FontWeight.SemiBold,
+                        fontWeight = FontWeight.Normal,
                         fontSize = 15.sp,
                         color = Color.Black
                     ) },
@@ -277,9 +298,9 @@ Column {
                     maxLines = 1,
                     colors = TextFieldDefaults.colors(
                         focusedTextColor = Color.Black,
-                        unfocusedTextColor = Color.Gray,
-                        focusedContainerColor = Color.White,
-                        unfocusedContainerColor = Color.White,
+                        unfocusedTextColor = Color(0xff1D24CA),
+                        focusedContainerColor = Color(0xff008DDA),
+                        unfocusedContainerColor = Color(0xff008DDA),
                         unfocusedLabelColor = Color.Black,
                         focusedIndicatorColor = Color.Black,
                         unfocusedIndicatorColor = Color.Transparent,
@@ -328,7 +349,7 @@ Column {
                             .height(50.dp)
                             .width(350.dp),
                         shape = RoundedCornerShape(10.dp,0.dp,10.dp,10.dp)
-                        ,colors = ButtonDefaults.buttonColors(Color.Black)) {
+                        ,colors = ButtonDefaults.buttonColors(Color(0xff1D24CA))) {
                         Text(text = "Sign Up", style = TextStyle(),
                             fontFamily = FontFamily.Monospace,
                             fontWeight = FontWeight.SemiBold,
@@ -347,13 +368,13 @@ Column {
                     Text(text = "Already have an Account?",style = TextStyle(),
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Normal,
-                        color = Color.Black,
+                        color = Color.White,
                     )
                     Text(text = " Sign In",
                         style = TextStyle(),
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.SemiBold,
-                        color = Color.Black,
+                        color = Color(0xff008DDA),
                         modifier = Modifier.clickable { navController.navigate("login") }
                     )
 

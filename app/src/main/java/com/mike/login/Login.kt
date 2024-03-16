@@ -45,6 +45,7 @@ import kotlin.math.max
 
 @Composable
 fun Loginscreen(navController: NavController){
+    GlobalVariables.visible.value = false
     var email by remember{ mutableStateOf("") }
     var password by remember{ mutableStateOf("") }
     var nullEmail by remember { mutableStateOf(false)}
@@ -118,16 +119,21 @@ fun Loginscreen(navController: NavController){
                             shape = RoundedCornerShape(topStart = 25.dp, 25.dp, 25.dp, 0.dp)
                         )
                         .size(50.dp)
+                        .clickable {
+                            GlobalVariables.colvisible.value = !GlobalVariables.colvisible.value
+                        }
 
                 )
             }
         }
 
+        AnimatedVisibility(visible = GlobalVariables.colvisible.value) {
 
        Column(modifier = Modifier
            .border(
                border = BorderStroke(1.dp, brush = borderbrush),
-               shape = RoundedCornerShape(70.dp, 0.dp, 0.dp, 0.dp))
+               shape = RoundedCornerShape(70.dp, 0.dp, 0.dp, 0.dp)
+           )
            .background(brush = lowerbrush, shape = RoundedCornerShape(topStart = 70.dp))
            .height(750.dp)
            .fillMaxWidth(),
@@ -239,9 +245,9 @@ Spacer(modifier = Modifier.height(30.dp))
                Text(text = "Forgot Password?",style = TextStyle(),
                    fontSize = 15.sp,
                    fontWeight = FontWeight.Normal,
-                   color = Color.Black)
+                   color = Color.White)
                Text(text = " Reset", style = TextStyle(),
-                   color = Color(0xff1D24CA),
+                   color = Color(0xff008DDA),
                    fontWeight = FontWeight.Bold,
                    fontSize = 15.sp)
 
@@ -294,13 +300,13 @@ Spacer(modifier = Modifier.height(30.dp))
                Text(text = "Dont have an Account?",style = TextStyle(),
                    fontFamily = FontFamily.SansSerif,
                    fontWeight = FontWeight.Normal,
-                   color = Color.Black,
+                   color = Color.White,
                    )
                Text(text = " Sign Up",
                    style = TextStyle(),
                    fontFamily = FontFamily.SansSerif,
                    fontWeight = FontWeight.Bold,
-                   color = Color(0xff1D24CA),
+                   color = Color(0xff008DDA),
                    modifier = Modifier.clickable { navController.navigate("signup") }
               )
 
@@ -308,7 +314,7 @@ Spacer(modifier = Modifier.height(30.dp))
 
 
        }
-
+}
 
 
    }

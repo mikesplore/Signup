@@ -59,6 +59,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation ("androidx.navigation:navigation-compose:2.7.7")
+    implementation ("io.coil-kt:coil-compose:2.2.2")
+    implementation ("androidx.activity:activity-compose:1.6.1")
 
     implementation(libs.androidx.material3)
     testImplementation(libs.junit)
