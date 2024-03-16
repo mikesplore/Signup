@@ -21,6 +21,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
@@ -29,6 +30,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -43,13 +45,32 @@ import com.mike.login.R.drawable.x
 
 @Composable
 fun Profile(navController: NavController){
+    val profilecustomBrush = Brush.horizontalGradient(
+        colors = listOf(
+            Color(0xFF008DDA), // 0486d1
+            Color(0xff1D24CA), // 42adeb
+            Color(0xff008DDA),
+            // a3bad1
+        )
+
+    )
+
+    val backcustomBrush = Brush.linearGradient(
+        colors = listOf(
+            Color(0xff008DDA), // 0486d1
+            Color(0xff1D24CA), // 42adeb
+            Color(0xff67C6E3),
+            Color(0xff008DDA), // 0486d1
+            Color(0xff1D24CA)// a3bad1
+        )
+    )
     Column(modifier = Modifier
-        .background(Color.White)
+        .background(brush = backcustomBrush)
         .fillMaxSize()) {
         Column(
             modifier = Modifier
                 .height(320.dp)
-                .background(Color.Black, shape = RoundedCornerShape(0.dp, 0.dp, 30.dp, 30.dp))
+                .background(brush = profilecustomBrush, shape = RoundedCornerShape(0.dp,0.dp,20.dp,20.dp))
                 .fillMaxWidth(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -95,7 +116,7 @@ fun Profile(navController: NavController){
                     modifier = Modifier
                         .size(130.dp)
                         .background(Color.White, shape = CircleShape)
-                        .border(3.dp, color = Color.White, shape = CircleShape),
+                        .border(3.dp, color = Color(0xff67C6E3), shape = CircleShape),
                     contentAlignment = Alignment.Center
                 ) {
                     Image(
@@ -110,29 +131,50 @@ fun Profile(navController: NavController){
                 Column (horizontalAlignment = Alignment.CenterHorizontally){
                     Text(text = "Michael Odhiambo", style = TextStyle(),
                         fontWeight = FontWeight.SemiBold,
-                        color = Color.White)
+                        color = Color.White,
+                        fontSize = 30.sp)
                     Text(text = "Android Developer", style = TextStyle(),
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color.White)
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xff67C6E3),
+                        fontSize = 16.sp
+                        )
                 }
 
 
                 Row (modifier = Modifier
                     .height(50.dp)
                     .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center){
-                    Text(text = "1000 Followers", style = TextStyle(),
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color.White)
+                    horizontalArrangement = Arrangement.SpaceEvenly){
+                    Column(verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(text = "1000", style = TextStyle(),
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White,
+                            fontSize = 18.sp)
+                        Text(text = "Followers", style = TextStyle(),
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color(0xff67C6E3),
+                            fontSize = 15.sp)
+                    }
+
+
                     Spacer(modifier = Modifier.width(10.dp))
                     Divider(color = Color.White,modifier = Modifier
                         .width(1.dp)
-                        .height(20.dp))
+                        .height(40.dp))
                     Spacer(modifier = Modifier.width(10.dp))
 
-                    Text(text = "1200 Following", style = TextStyle(),
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color.White)
+                    Column(verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(text = "1500", style = TextStyle(),
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White,
+                            fontSize = 18.sp)
+                        Text(text = "Following", style = TextStyle(),
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color(0xff67C6E3),
+                            fontSize = 15.sp)
+                    }
 
                 }
             }
@@ -141,6 +183,30 @@ fun Profile(navController: NavController){
     Spacer(modifier = Modifier.height(20.dp))
         Column (verticalArrangement = Arrangement.Center,
             ){
+
+            Row (modifier = Modifier.height(80.dp)){
+                Spacer(modifier = Modifier.width(25.dp))
+                Icon(imageVector = Icons.Default.Person, contentDescription = "Name",modifier = Modifier.size(30.dp))
+                Column(modifier = Modifier
+                    .height(50.dp)
+                    .fillMaxWidth(),
+                    verticalArrangement = Arrangement.SpaceBetween) {
+                    Text(text = "Name", style = TextStyle(),
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.Normal,
+                        fontFamily = FontFamily.SansSerif
+                    )
+                    Text(text = "Michael Odhiambo", style = TextStyle(),
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.Normal,
+                        fontFamily = FontFamily.SansSerif
+                    )
+                }
+
+
+            }
+            Divider(color = Color.Gray, modifier = Modifier.width(340.dp))
+
             Row (modifier = Modifier.height(80.dp)){
                 Spacer(modifier = Modifier.width(25.dp))
                 Icon(imageVector = Icons.Default.Email, contentDescription = "email",modifier = Modifier.size(30.dp))
@@ -263,21 +329,7 @@ fun Profile(navController: NavController){
             }
             Divider(color = Color.Gray, modifier = Modifier.width(310.dp))
             Spacer(modifier = Modifier.height(10.dp))
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                Row (modifier = Modifier
-                    .height(50.dp)
-                    .background(Color.Black, shape = RoundedCornerShape(10.dp))
-                    .width(300.dp),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically){
-                    Text(text = "Save Details", style = TextStyle(),
-                        fontFamily = FontFamily.SansSerif,
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color.White,
-                        fontSize = 20.sp)
 
-                }
-            }
 
         }
 
