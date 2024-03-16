@@ -66,9 +66,6 @@ fun Settingsscreen(navController: NavController){
             contentAlignment = Alignment.Center){
             Row(modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center) {
-                Column {
-
-                }
                 Button(
                     onClick = { navController.popBackStack() },
                     colors = ButtonDefaults.buttonColors(Color.Black)
