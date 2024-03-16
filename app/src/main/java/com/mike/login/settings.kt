@@ -19,6 +19,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -81,7 +82,7 @@ fun Settingsscreen(navController: NavController){
                 }
                 Box(modifier = Modifier.width(70.dp))
 
-                Text(text = "Sign Up",style = TextStyle(),
+                Text(text = "Settings",style = TextStyle(),
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.Monospace,
@@ -102,6 +103,37 @@ fun Settingsscreen(navController: NavController){
         ){
 
             Spacer(modifier = Modifier.height(35.dp))
+            Column(modifier = Modifier
+                .height(450.dp)
+                .width(350.dp)) {
+                Row (modifier = Modifier
+                    .height(70.dp)
+                    .width(350.dp)){
+
+
+                }
+                Divider(color = Color.Gray)
+
+                Row (modifier = Modifier
+                    .height(70.dp)
+                    .width(350.dp)){
+
+                }
+                Divider(color = Color.Gray)
+                Row (modifier = Modifier
+                    .height(70.dp)
+                    .width(350.dp)){
+
+                }
+                Divider(color = Color.Gray)
+                Row (modifier = Modifier
+                    .height(70.dp)
+                    .width(350.dp)){
+
+                }
+                Divider(color = Color.Gray)
+
+            }
 
 
             Column(modifier = Modifier
