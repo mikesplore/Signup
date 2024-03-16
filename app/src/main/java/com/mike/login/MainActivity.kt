@@ -102,7 +102,7 @@ fun MyScreens() {
     {
         NavHost(
             navController = navController,
-            startDestination = "profile"
+            startDestination = "login"
         ) {
             composable("login") { Loginscreen(navController = navController) }
             composable("signup") { Signupscreen(navController = navController) }
