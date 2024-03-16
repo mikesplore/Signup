@@ -308,17 +308,9 @@ Column {
 
                 Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center){
                     Button(onClick = {
-                        if (password.isEmpty()) {
-                            pError = true;
-                        } else {
-                            pError = false;
-                        }
+                        pError = password.isEmpty()
 
-                        if (confirmpassword.isEmpty()) {
-                            cpError = true;
-                        } else {
-                            cpError = false;
-                        }
+                        cpError = confirmpassword.isEmpty()
                         if (password != confirmpassword) {
                             errormsg = "Password not Matching";
                             cpError = true
@@ -326,22 +318,10 @@ Column {
                             cpError = false;
                         }
 
-                        if (firstname.isEmpty()) {
-                            fnError = true;
-                        } else {
-                            fnError = false;
-                        }
-                        if (lastname.isEmpty()) {
-                            lnError = true;
-                        } else {
-                            lnError = false;
-                        }
+                        fnError = firstname.isEmpty()
+                        lnError = lastname.isEmpty()
 
-                        nullEmail = if (email.isEmpty()) {
-                            true;
-                        } else {
-                            false;
-                        }
+                        nullEmail = email.isEmpty()
 
                         if (!pError && !nullEmail && !fnError && !cpError && !lnError) {
                             navController.navigate("profile");
@@ -351,10 +331,7 @@ Column {
                         modifier = Modifier
                             .height(50.dp)
                             .width(350.dp),
-
                         shape = RoundedCornerShape(10.dp,0.dp,10.dp,10.dp)
-
-
                         ,colors = ButtonDefaults.buttonColors(Color.Black)) {
                         Text(text = "Sign Up", style = TextStyle(),
                             fontFamily = FontFamily.Monospace,
