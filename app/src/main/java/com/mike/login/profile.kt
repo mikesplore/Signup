@@ -23,17 +23,14 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Call
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Phone
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -53,17 +50,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
-import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
-import com.mike.login.R.drawable.x
 
 @Composable
 fun Profile(navController: NavController){
     GlobalVariables.visible.value = true
+    var fullname by remember { mutableStateOf("Michael Odhiambo")}
+    var email by remember { mutableStateOf("mikepremium8@gmail.com")}
+    var phone by remember { mutableStateOf("+254799013845")}
+    var facebook by remember { mutableStateOf("Mike Mike")}
+    var username by remember { mutableStateOf("mikesplore")}
     val profilecustomBrush = Brush.horizontalGradient(
         colors = listOf(
             Color(0xff008DDA),
@@ -121,12 +120,23 @@ fun Profile(navController: NavController){
                 color = Color.White
             )
             Spacer(modifier = Modifier.width(90.dp))
-            Icon(
-                imageVector = Icons.Default.Check,
-                contentDescription = "Settings",
-                tint = Color.White,
-                modifier = Modifier.clickable { navController.navigate("login") }
-            )
+                var topuppertext by remember { mutableStateOf("Edit") }
+
+                Box(
+                    modifier = Modifier
+                        .clickable {
+                            GlobalVariables.editenabled.value = !GlobalVariables.editenabled.value
+                            topuppertext = if (GlobalVariables.editenabled.value) "Save" else "Edit"
+                        }
+                ) {
+                    Text(text = topuppertext,
+                        style = TextStyle(),
+                        color = Color.White,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        fontFamily = FontFamily.SansSerif
+                    )
+                }
         }
             Spacer(modifier = Modifier.height(10.dp))
             Column(modifier = Modifier
@@ -171,7 +181,7 @@ fun Profile(navController: NavController){
 
 
                 Column (horizontalAlignment = Alignment.CenterHorizontally){
-                    Text(text = "Michael Odhiambo", style = TextStyle(),
+                    Text(text = fullname, style = TextStyle(),
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White,
                         fontSize = 30.sp)
@@ -226,32 +236,32 @@ fun Profile(navController: NavController){
 
         Column (verticalArrangement = Arrangement.Center,
             ){
-
-            var name by remember { mutableStateOf("Michael Odhiambo") }
-            var isEditing by remember { mutableStateOf(false) }
-            var newName by remember { mutableStateOf(name) }
-
+            val backcustomBrush = Brush.linearGradient(
+                colors = listOf(
+                    Color(0xff008DDA),
+                    Color(0xff1D24CA),
+                    Color(0xff6200EA),
+                    Color(0xffA100FF)
+                )
+            )
             Row(
                 modifier = Modifier
-                    .height(75.dp)
-                    .clickable { isEditing = !isEditing }
+                    .fillMaxWidth()
+                    .height(90.dp)
                     .padding(horizontal = 16.dp),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Spacer(modifier = Modifier.width(25.dp))
 
-                if (isEditing) {
-                    OutlinedTextField(
-                        value = newName,
-                        onValueChange = { newName = it },
-                        label = { Text("Edit Name") },
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                } else {
+
                     Column(
                         modifier = Modifier
+                            .background(
+                                brush = backcustomBrush,
+                                shape = RoundedCornerShape(20.dp, 0.dp)
+                            )
                             .fillMaxWidth()
-                            .height(75.dp),
+                            .height(90.dp),
                         verticalArrangement = Arrangement.SpaceAround
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -261,7 +271,7 @@ fun Profile(navController: NavController){
                                         Color(0xff008DDA),
                                         shape = RoundedCornerShape(20.dp)
                                     )
-                                    .size(50.dp),
+                                    .size(40.dp),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Icon(
@@ -272,7 +282,7 @@ fun Profile(navController: NavController){
                                 )
                             }
                             Text(
-                                text = "  Name",
+                                text = "  Full Name",
                                 style = TextStyle(),
                                 fontSize = 17.sp,
                                 fontWeight = FontWeight.Normal,
@@ -280,478 +290,326 @@ fun Profile(navController: NavController){
                                 color = Color.White
                             )
                         }
-                        Text(
-                            text = "                $name",
-                            style = TextStyle(),
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight.Bold,
-                            fontFamily = FontFamily.SansSerif,
-                            color = Color.White
+                        TextField(
+                            value = fullname,
+                            textStyle = TextStyle(
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = 15.sp,
+                                color = Color.White // Set the text color
+                            ),
+                            onValueChange = { fullname = it },
+                            modifier = Modifier
+                                .height(50.dp),
+                            colors = TextFieldDefaults.colors(
+                                focusedContainerColor = Color.Transparent,
+                                unfocusedContainerColor = Color.Transparent,
+                                focusedIndicatorColor = Color.Transparent,
+                                unfocusedIndicatorColor = Color.Transparent,
+                                unfocusedTextColor = Color.White,
+                                cursorColor = Color.White,
+                                focusedLabelColor = Color.White,
+                                unfocusedLabelColor = Color.White,
+                                disabledContainerColor = Color.Transparent
+                            ),
+                            singleLine = true,
+                            enabled = GlobalVariables.editenabled.value
                         )
+
+
                     }
                 }
-            }
-
-            Divider(color = Color.Gray, modifier = Modifier.width(340.dp))
-
-            if (isEditing) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
-                ) {
-                    TextButton(
-                        onClick = {
-                            isEditing = false
-                            newName = name // Reset newName to the original name
-                        }
-                    ) {
-                        Text("Cancel")
-                    }
-                    TextButton(
-                        onClick = {
-                            isEditing = false
-                            name = newName // Update the original name with the new name
-                        }
-                    ) {
-                        Text("Save")
-                    }
-                }
-            }
-
 
             Row(
                 modifier = Modifier
-                    .height(75.dp)
-                    .clickable { isEditing = !isEditing }
+                    .height(90.dp)
                     .padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Spacer(modifier = Modifier.width(25.dp))
 
-                if (isEditing) {
-                    OutlinedTextField(
-                        value = newName,
-                        onValueChange = { newName = it },
-                        label = { Text("Edit Name") },
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                } else {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(75.dp),
-                        verticalArrangement = Arrangement.SpaceAround
-                    ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Box(
-                                modifier = Modifier
-                                    .background(
-                                        Color(0xff008DDA),
-                                        shape = RoundedCornerShape(20.dp)
-                                    )
-                                    .size(50.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.Email,
-                                    contentDescription = "Email",
-                                    modifier = Modifier.size(30.dp),
-                                    tint = Color.White
+
+                Column(
+                    modifier = Modifier
+                        .background(brush = backcustomBrush)
+                        .fillMaxWidth()
+                        .height(90.dp),
+                    verticalArrangement = Arrangement.SpaceAround
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Box(
+                            modifier = Modifier
+                                .background(
+                                    Color(0xff008DDA),
+                                    shape = RoundedCornerShape(20.dp)
                                 )
-                            }
-                            Text(
-                                text = "  Email",
-                                style = TextStyle(),
-                                fontSize = 17.sp,
-                                fontWeight = FontWeight.Normal,
-                                fontFamily = FontFamily.SansSerif,
-                                color = Color.White
+                                .size(40.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Person,
+                                contentDescription = "Name",
+                                modifier = Modifier.size(30.dp),
+                                tint = Color.White
                             )
                         }
                         Text(
-                            text = "                mikepremium8@gmail.com",
+                            text = "  Username",
                             style = TextStyle(),
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight.Bold,
+                            fontSize = 17.sp,
+                            fontWeight = FontWeight.Normal,
                             fontFamily = FontFamily.SansSerif,
                             color = Color.White
                         )
                     }
-                }
-            }
+                    TextField(
+                        value = username,
+                        textStyle = TextStyle(
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 15.sp,
+                            color = Color.White // Set the text color
+                        ),
+                        onValueChange = { username   = it.takeLastWhile { it != ' ' } },
+                        modifier = Modifier
+                            .height(50.dp),
+                        colors = TextFieldDefaults.colors(
+                            focusedContainerColor = Color.Transparent,
+                            unfocusedContainerColor = Color.Transparent,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            unfocusedTextColor = Color.White,
+                            cursorColor = Color.White,
+                            focusedLabelColor = Color.White,
+                            unfocusedLabelColor = Color.White,
+                            disabledContainerColor = Color.Transparent
+                        ),
+                        singleLine = true,
+                        enabled = GlobalVariables.editenabled.value
+                    )
 
-            Divider(color = Color.Gray, modifier = Modifier.width(340.dp))
 
-            if (isEditing) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
-                ) {
-                    TextButton(
-                        onClick = {
-                            isEditing = false
-                            newName = name // Reset newName to the original name
-                        }
-                    ) {
-                        Text("Cancel")
-                    }
-                    TextButton(
-                        onClick = {
-                            isEditing = false
-                            name = newName // Update the original name with the new name
-                        }
-                    ) {
-                        Text("Save")
-                    }
                 }
             }
 
             Row(
                 modifier = Modifier
-                    .height(75.dp)
-                    .clickable { isEditing = !isEditing }
+                    .height(90.dp)
                     .padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Spacer(modifier = Modifier.width(25.dp))
 
-                if (isEditing) {
-                    OutlinedTextField(
-                        value = newName,
-                        onValueChange = { newName = it },
-                        label = { Text("Edit Name") },
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                } else {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(75.dp),
-                        verticalArrangement = Arrangement.SpaceAround
-                    ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Box(
-                                modifier = Modifier
-                                    .background(
-                                        Color(0xff008DDA),
-                                        shape = RoundedCornerShape(20.dp)
-                                    )
-                                    .size(50.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.Phone,
-                                    contentDescription = "Phone",
-                                    modifier = Modifier.size(30.dp),
-                                    tint = Color.White
+
+                Column(
+                    modifier = Modifier
+                        .background(brush = backcustomBrush)
+                        .fillMaxWidth()
+                        .height(90.dp),
+                    verticalArrangement = Arrangement.SpaceAround
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Box(
+                            modifier = Modifier
+                                .background(
+                                    Color(0xff008DDA),
+                                    shape = RoundedCornerShape(20.dp)
                                 )
-                            }
-                            Text(
-                                text = "  Contact",
-                                style = TextStyle(),
-                                fontSize = 17.sp,
-                                fontWeight = FontWeight.Normal,
-                                fontFamily = FontFamily.SansSerif,
-                                color = Color.White
+                                .size(40.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Email,
+                                contentDescription = "Username",
+                                modifier = Modifier.size(30.dp),
+                                tint = Color.White
                             )
                         }
                         Text(
-                            text = "                +254799013845",
+                            text = "  Email",
                             style = TextStyle(),
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight.Bold,
+                            fontSize = 17.sp,
+                            fontWeight = FontWeight.Normal,
                             fontFamily = FontFamily.SansSerif,
                             color = Color.White
                         )
                     }
-                }
-            }
+                    TextField(
+                        value = email,
+                        textStyle = TextStyle(
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 15.sp,
+                            color = Color.White // Set the text color
+                        ),
+                        onValueChange = { email = it.takeLastWhile { it != ' ' } },
+                        modifier = Modifier
+                            .height(50.dp),
+                        colors = TextFieldDefaults.colors(
+                            focusedContainerColor = Color.Transparent,
+                            unfocusedContainerColor = Color.Transparent,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            unfocusedTextColor = Color.White,
+                            cursorColor = Color.White,
+                            focusedLabelColor = Color.White,
+                            unfocusedLabelColor = Color.White,
+                            disabledContainerColor = Color.Transparent
+                        ),
+                        singleLine = true,
+                        enabled = GlobalVariables.editenabled.value
+                    )
 
-            Divider(color = Color.Gray, modifier = Modifier.width(340.dp))
 
-            if (isEditing) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
-                ) {
-                    TextButton(
-                        onClick = {
-                            isEditing = false
-                            newName = name // Reset newName to the original name
-                        }
-                    ) {
-                        Text("Cancel")
-                    }
-                    TextButton(
-                        onClick = {
-                            isEditing = false
-                            name = newName // Update the original name with the new name
-                        }
-                    ) {
-                        Text("Save")
-                    }
                 }
             }
 
             Row(
                 modifier = Modifier
-                    .height(75.dp)
-                    .clickable { isEditing = !isEditing }
+                    .height(90.dp)
                     .padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Spacer(modifier = Modifier.width(25.dp))
 
-                if (isEditing) {
-                    OutlinedTextField(
-                        value = newName,
-                        onValueChange = { newName = it },
-                        label = { Text("Edit Name") },
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                } else {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(75.dp),
-                        verticalArrangement = Arrangement.SpaceAround
-                    ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Box(
-                                modifier = Modifier
-                                    .background(
-                                        Color(0xff008DDA),
-                                        shape = RoundedCornerShape(20.dp)
-                                    )
-                                    .size(50.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Image(painter = painterResource(id = R.drawable.insta), contentDescription = "Insta",
-                                    modifier = Modifier
-                                        .size(50.dp)
-                                        .clip(shape = CircleShape)
+
+                Column(
+                    modifier = Modifier
+                        .background(brush = backcustomBrush, shape = RoundedCornerShape(0.dp, 0.dp))
+                        .fillMaxWidth()
+                        .height(90.dp),
+                    verticalArrangement = Arrangement.SpaceAround
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Box(
+                            modifier = Modifier
+                                .background(
+                                    Color(0xff008DDA),
+                                    shape = RoundedCornerShape(20.dp)
                                 )
-                            }
-                            Text(
-                                text = "  Instagram",
-                                style = TextStyle(),
-                                fontSize = 17.sp,
-                                fontWeight = FontWeight.Normal,
-                                fontFamily = FontFamily.SansSerif,
-                                color = Color.White
+                                .size(40.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Phone,
+                                contentDescription = "Phone",
+                                modifier = Modifier.size(30.dp),
+                                tint = Color.White
                             )
                         }
                         Text(
-                            text = "                mikesplore",
+                            text = "  Phone",
                             style = TextStyle(),
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight.Bold,
+                            fontSize = 17.sp,
+                            fontWeight = FontWeight.Normal,
                             fontFamily = FontFamily.SansSerif,
                             color = Color.White
                         )
                     }
-                }
-            }
+                    TextField(
+                        value = phone,
+                        textStyle = TextStyle(
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 15.sp,
+                            color = Color.White // Set the text color
+                        ),
+                        onValueChange = { phone  = it.takeLastWhile { it != ' ' } },
+                        modifier = Modifier
+                            .height(50.dp),
+                        colors = TextFieldDefaults.colors(
+                            focusedContainerColor = Color.Transparent,
+                            unfocusedContainerColor = Color.Transparent,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            unfocusedTextColor = Color.White,
+                            cursorColor = Color.White,
+                            focusedLabelColor = Color.White,
+                            unfocusedLabelColor = Color.White,
+                            disabledContainerColor = Color.Transparent
+                        ),
+                        singleLine = true,
+                        enabled = GlobalVariables.editenabled.value
+                    )
 
-            Divider(color = Color.Gray, modifier = Modifier.width(340.dp))
 
-            if (isEditing) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
-                ) {
-                    TextButton(
-                        onClick = {
-                            isEditing = false
-                            newName = name // Reset newName to the original name
-                        }
-                    ) {
-                        Text("Cancel")
-                    }
-                    TextButton(
-                        onClick = {
-                            isEditing = false
-                            name = newName // Update the original name with the new name
-                        }
-                    ) {
-                        Text("Save")
-                    }
                 }
             }
 
             Row(
                 modifier = Modifier
-                    .height(75.dp)
-                    .clickable { isEditing = !isEditing }
+                    .height(90.dp)
                     .padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Spacer(modifier = Modifier.width(25.dp))
 
-                if (isEditing) {
-                    OutlinedTextField(
-                        value = newName,
-                        onValueChange = { newName = it },
-                        label = { Text("Edit Name") },
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                } else {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(75.dp),
-                        verticalArrangement = Arrangement.SpaceAround
-                    ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Box(
-                                modifier = Modifier
-                                    .background(
-                                        Color(0xff008DDA),
-                                        shape = RoundedCornerShape(20.dp)
-                                    )
-                                    .size(50.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Image(painter = painterResource(id = R.drawable.face), contentDescription = "facebook",
-                                    modifier = Modifier
-                                        .size(50.dp)
-                                        .clip(shape = CircleShape)
+
+                Column(
+                    modifier = Modifier
+                        .background(
+                            brush = backcustomBrush,
+                            shape = RoundedCornerShape(0.dp, 0.dp, 20.dp)
+                        )
+                        .fillMaxWidth()
+                        .height(90.dp),
+                    verticalArrangement = Arrangement.SpaceAround
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Box(
+                            modifier = Modifier
+                                .background(
+                                    Color(0xff008DDA),
+                                    shape = RoundedCornerShape(20.dp)
                                 )
-                            }
-                            Text(
-                                text = "  Facebook",
-                                style = TextStyle(),
-                                fontSize = 17.sp,
-                                fontWeight = FontWeight.Normal,
-                                fontFamily = FontFamily.SansSerif,
-                                color = Color.White
-                            )
+                                .size(40.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Image(painter = painterResource(id = R.drawable.ig), contentDescription = "facebook",
+                                modifier = Modifier
+                                    .size(40.dp)
+                                    .clip(shape = RoundedCornerShape(20.dp)))
                         }
                         Text(
-                            text = "                Mike Mike",
+                            text = "  Instagram",
                             style = TextStyle(),
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight.Bold,
+                            fontSize = 17.sp,
+                            fontWeight = FontWeight.Normal,
                             fontFamily = FontFamily.SansSerif,
                             color = Color.White
                         )
                     }
-                }
-            }
-
-            Divider(color = Color.Gray, modifier = Modifier.width(340.dp))
-
-            if (isEditing) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
-                ) {
-                    TextButton(
-                        onClick = {
-                            isEditing = false
-                            newName = name // Reset newName to the original name
-                        }
-                    ) {
-                        Text("Cancel")
-                    }
-                    TextButton(
-                        onClick = {
-                            isEditing = false
-                            name = newName // Update the original name with the new name
-                        }
-                    ) {
-                        Text("Save")
-                    }
-                }
-            }
-
-            Row(
-                modifier = Modifier
-                    .height(75.dp)
-                    .clickable { isEditing = !isEditing }
-                    .padding(horizontal = 16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Spacer(modifier = Modifier.width(25.dp))
-
-                if (isEditing) {
-                    OutlinedTextField(
-                        value = newName,
-                        onValueChange = { newName = it },
-                        label = { Text("Edit Name") },
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                } else {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(75.dp),
-                        verticalArrangement = Arrangement.SpaceAround
-                    ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Box(
-                                modifier = Modifier
-                                    .background(
-                                        Color(0xff008DDA),
-                                        shape = RoundedCornerShape(20.dp)
-                                    )
-                                    .size(50.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Image(painter = painterResource(id = R.drawable.x), contentDescription = "x",
-                                    modifier = Modifier
-                                        .size(50.dp)
-                                        .clip(shape = CircleShape)
-                                )
-                            }
-                            Text(
-                                text = "  X(Twitter)",
-                                style = TextStyle(),
-                                fontSize = 17.sp,
-                                fontWeight = FontWeight.Normal,
-                                fontFamily = FontFamily.SansSerif,
-                                color = Color.White
-                            )
-                        }
-                        Text(
-                            text = "                mikesplore",
-                            style = TextStyle(),
+                    TextField(
+                        value = facebook,
+                        textStyle = TextStyle(
+                            fontWeight = FontWeight.SemiBold,
                             fontSize = 15.sp,
-                            fontWeight = FontWeight.Bold,
-                            fontFamily = FontFamily.SansSerif,
                             color = Color.White
-                        )
-                    }
+                        ),
+                        onValueChange = {facebook = it  },
+                        modifier = Modifier
+                            .height(50.dp),
+                        colors = TextFieldDefaults.colors(
+                            focusedContainerColor = Color.Transparent,
+                            unfocusedContainerColor = Color.Transparent,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            unfocusedTextColor = Color.White,
+                            cursorColor = Color.White,
+                            focusedLabelColor = Color.White,
+                            unfocusedLabelColor = Color.White,
+                            disabledContainerColor = Color.Transparent
+                        ),
+                        singleLine = true,
+                        enabled = GlobalVariables.editenabled.value
+                        
+                    )
+
+
                 }
             }
 
-            Divider(color = Color.Gray, modifier = Modifier.width(340.dp))
-
-            if (isEditing) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
-                ) {
-                    TextButton(
-                        onClick = {
-                            isEditing = false
-                            newName = name // Reset newName to the original name
-                        }
-                    ) {
-                        Text("Cancel")
-                    }
-                    TextButton(
-                        onClick = {
-                            isEditing = false
-                            name = newName // Update the original name with the new name
-                        }
-                    ) {
-                        Text("Save")
-                    }
-                }
             }
 
-        }
+
+
+
 
     }
 

@@ -145,7 +145,7 @@ fun Signupscreen(navController: NavController){
                     modifier = Modifier
 
                         .width(350.dp),
-                    maxLines = 1,
+                    singleLine = true,
                     shape = RoundedCornerShape(10.dp),
                     colors = TextFieldDefaults.colors(
                         focusedTextColor = Color.Black,
@@ -182,7 +182,7 @@ fun Signupscreen(navController: NavController){
                     ) },
                     modifier = Modifier
                         .width(350.dp),
-                    maxLines = 1,
+                    singleLine = true,
                     shape = RoundedCornerShape(10.dp),
                     colors = TextFieldDefaults.colors(
                         focusedTextColor = Color.Black,
@@ -219,7 +219,7 @@ fun Signupscreen(navController: NavController){
                     ) },
                     modifier = Modifier
                         .width(350.dp),
-                    maxLines = 1,
+                    singleLine = true,
                     shape = RoundedCornerShape(10.dp),
                     colors = TextFieldDefaults.colors(
                         focusedTextColor = Color.Black,
@@ -256,7 +256,7 @@ fun Signupscreen(navController: NavController){
                     ) },
                     modifier = Modifier
                         .width(350.dp),
-                    maxLines = 1,
+                    singleLine = true,
                     shape = RoundedCornerShape(10.dp),
                     colors = TextFieldDefaults.colors(
                         focusedTextColor = Color.Black,
@@ -295,7 +295,7 @@ fun Signupscreen(navController: NavController){
                     modifier = Modifier
                         .width(350.dp),
                     shape = RoundedCornerShape(10.dp),
-                    maxLines = 1,
+                    singleLine = true,
                     colors = TextFieldDefaults.colors(
                         focusedTextColor = Color.Black,
                         unfocusedTextColor = Color(0xff1D24CA),

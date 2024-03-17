@@ -5,7 +5,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -41,7 +40,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import kotlin.math.max
 
 @Composable
 fun Loginscreen(navController: NavController){
@@ -174,7 +172,7 @@ fun Loginscreen(navController: NavController){
                   ) },
                    modifier = Modifier
                        .width(350.dp),
-                   maxLines = 1,
+                   singleLine = true,
                    shape = RoundedCornerShape(10.dp),
                    colors = TextFieldDefaults.colors(
                        focusedTextColor = Color.Black,
@@ -211,8 +209,9 @@ fun Loginscreen(navController: NavController){
                    ) },
                    modifier = Modifier
                        .width(350.dp),
-                   maxLines = 1,
+
                    shape = RoundedCornerShape(10.dp),
+                   singleLine = true,
                    colors = TextFieldDefaults.colors(
                        focusedTextColor = Color.Black,
                        unfocusedTextColor = Color.Black,
@@ -262,11 +261,7 @@ Spacer(modifier = Modifier.height(30.dp))
                        nullPassword = false;
                    }
 
-                   nullEmail = if (email.isEmpty()) {
-                       true;
-                   } else {
-                       false;
-                   }
+                   nullEmail = email.isEmpty()
 
                    if (!nullPassword && !nullEmail) {
                        navController.navigate("signup");
@@ -297,7 +292,7 @@ Spacer(modifier = Modifier.height(30.dp))
                .height(50.dp),
                horizontalArrangement = Arrangement.Center,
                verticalAlignment = Alignment.Bottom) {
-               Text(text = "Dont have an Account?",style = TextStyle(),
+               Text(text = "Don't have an Account?",style = TextStyle(),
                    fontFamily = FontFamily.SansSerif,
                    fontWeight = FontWeight.Normal,
                    color = Color.White,
