@@ -44,46 +44,39 @@ import androidx.navigation.compose.rememberNavController
 @Composable
 fun Loginscreen(navController: NavController){
     GlobalVariables.visible.value = false
-    var email by remember{ mutableStateOf("") }
+    var username by remember{ mutableStateOf("") }
     var password by remember{ mutableStateOf("") }
     var nullEmail by remember { mutableStateOf(false)}
     var nullPassword by remember { mutableStateOf(false)}
 
 
-    val upperbrush = Brush.horizontalGradient(
+    val upperbrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xff008DDA),
-            Color(0xff1D24CA),
-            Color(0xff6200EA),
-            Color(0xffA100FF)
+            Color(0xFF2196F3), // Blue
+            Color(0xFF9C27B0)
 
             )
     )
 
     val lowerbrush = Brush.linearGradient(
         colors = listOf(
-            Color(0xff008DDA),
-            Color(0xff1D24CA),
-            Color(0xff6200EA),
-            Color(0xffA100FF)
+            Color(0xFF2196F3), // Blue
+            Color(0xFF9C27B0)
 
 
         )
     )
     val middlebrush = Brush.horizontalGradient(
         colors = listOf(
-            Color(0xff008DDA),
-            Color(0xff1D24CA),
-            Color(0xff6200EA),
-            Color(0xffA100FF)
-
-
+            Color(0xFF2196F3), // Blue
+            Color(0xFF9C27B0)
         )
     )
+
     val borderbrush = Brush.linearGradient(
         colors = listOf(
-            Color(0xff008DDA),
-            Color(0xff1D24CA),
+            Color(0xFF2196F3), // Blue
+            Color(0xFFCCCCCC)
 
 
 
@@ -113,7 +106,7 @@ fun Loginscreen(navController: NavController){
                 Box(
                     modifier = Modifier
                         .background(
-                            Color(0xff1D24CA),
+                            brush = lowerbrush  ,
                             shape = RoundedCornerShape(topStart = 25.dp, 25.dp, 25.dp, 0.dp)
                         )
                         .size(50.dp)
@@ -160,11 +153,11 @@ fun Loginscreen(navController: NavController){
                horizontalAlignment = Alignment.CenterHorizontally,
                verticalArrangement = Arrangement.SpaceAround){
                OutlinedTextField(
-                   value = email,
+                   value = username,
                    onValueChange = {
                        nullEmail = false
-                       email = it },
-                   label = { Text("Email", style = TextStyle(),
+                       username = it },
+                   label = { Text("username", style = TextStyle(),
                        fontFamily = FontFamily.Monospace,
                        fontWeight = FontWeight.Normal,
                        fontSize = 15.sp,
@@ -246,7 +239,7 @@ Spacer(modifier = Modifier.height(30.dp))
                    fontWeight = FontWeight.Normal,
                    color = Color.White)
                Text(text = " Reset", style = TextStyle(),
-                   color = Color(0xff008DDA),
+                   color = Color(0xFF2196F3),
                    fontWeight = FontWeight.Bold,
                    fontSize = 15.sp)
 
@@ -261,7 +254,7 @@ Spacer(modifier = Modifier.height(30.dp))
                        nullPassword = false;
                    }
 
-                   nullEmail = email.isEmpty()
+                   nullEmail = username.isEmpty()
 
                    if (!nullPassword && !nullEmail) {
                        navController.navigate("signup");
@@ -274,7 +267,7 @@ Spacer(modifier = Modifier.height(30.dp))
                    shape = RoundedCornerShape(10.dp,0.dp,10.dp,10.dp)
 
 
-                   ,colors = ButtonDefaults.buttonColors(Color(0xff1D24CA))) {
+                   ,colors = ButtonDefaults.buttonColors(Color(0xFF9C27B0))) {
                    Text(text = "Login", style = TextStyle(),
                        fontFamily = FontFamily.Monospace,
                        fontWeight = FontWeight.SemiBold,

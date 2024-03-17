@@ -63,23 +63,19 @@ fun Profile(navController: NavController){
     var phone by remember { mutableStateOf("+254799013845")}
     var facebook by remember { mutableStateOf("Mike Mike")}
     var username by remember { mutableStateOf("mikesplore")}
-    val profilecustomBrush = Brush.horizontalGradient(
+
+    val profilebrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xff008DDA),
-            Color(0xff1D24CA),
-            Color(0xff6200EA),
-            Color(0xffA100FF)
+            Color(0xFF2196F3), // Blue
+            Color(0xFF9C27B0)
 
         )
-
     )
 
     val backcustomBrush = Brush.linearGradient(
         colors = listOf(
-            Color(0xff008DDA),
-            Color(0xff1D24CA),
-            Color(0xff6200EA),
-            Color(0xffA100FF)
+            Color(0xFF2196F3), // Blue
+            Color(0xFF9C27B0)
         )
     )
     Column(modifier = Modifier
@@ -89,7 +85,7 @@ fun Profile(navController: NavController){
             modifier = Modifier
                 .height(320.dp)
                 .background(
-                    brush = profilecustomBrush,
+                    brush = profilebrush,
                     shape = RoundedCornerShape(0.dp, 0.dp, 20.dp, 20.dp)
                 )
                 .fillMaxWidth(),
@@ -164,8 +160,12 @@ fun Profile(navController: NavController){
                         .size(130.dp)
                         .background(Color.White, shape = CircleShape)
                         .border(3.dp, color = Color(0xff67C6E3), shape = CircleShape)
-                        .clickable {
+                        .clickable(
+                            enabled = GlobalVariables.editenabled.value
+                        ) {
                             launcher.launch("image/*")
+
+
                         },
                     contentAlignment = Alignment.Center
                 ) {
@@ -236,12 +236,10 @@ fun Profile(navController: NavController){
 
         Column (verticalArrangement = Arrangement.Center,
             ){
-            val backcustomBrush = Brush.linearGradient(
+            val backcustomBrush = Brush.horizontalGradient(
                 colors = listOf(
-                    Color(0xff008DDA),
-                    Color(0xff1D24CA),
-                    Color(0xff6200EA),
-                    Color(0xffA100FF)
+                    Color(0xFF2196F3), // Blue
+                    Color(0xFF9C27B0)
                 )
             )
             Row(

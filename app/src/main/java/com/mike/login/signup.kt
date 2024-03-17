@@ -56,29 +56,34 @@ fun Signupscreen(navController: NavController){
     var cpError by remember { mutableStateOf(false)}
     var errormsg by remember { mutableStateOf("Field cant b empty")}
 
-    val upperbrush = Brush.linearGradient(
+    val upperbrush = Brush.horizontalGradient(
         colors = listOf(
-            Color(0xff008DDA),
-            Color(0xff1D24CA),
-            Color(0xff6200EA),
-            Color(0xffA100FF)
+            Color(0xFF2196F3), // Blue
+                Color(0xFF9C27B0)
 
         )
     )
 
-    val lowerbrush = Brush.horizontalGradient(
+    val lowerbrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xff008DDA),
-            Color(0xff1D24CA),
-            Color(0xff6200EA),
-            Color(0xffA100FF)
-
+            Color(0xFF9C27B0),
+            Color(0xFF2196F3), // Blue
+            Color(0xFFCCCCCC), // Gray
 
         )
     )
+
+    val middlebrush = Brush.verticalGradient(
+        colors = listOf(
+            Color(0xFF9C27B0),
+            Color(0xFF2196F3), // Blue
+
+        )
+    )
+
 
     Column(modifier = Modifier
-        .background(brush = upperbrush)
+        .background(brush = lowerbrush)
         .verticalScroll(rememberScrollState())
         .fillMaxSize(),
         verticalArrangement = Arrangement.Top) {
@@ -115,7 +120,7 @@ fun Signupscreen(navController: NavController){
         }
 
         Column(modifier = Modifier
-            .background(brush = lowerbrush, shape = RoundedCornerShape(topStart = 70.dp))
+            .background(brush = upperbrush, shape = RoundedCornerShape(topStart = 70.dp))
             .height(750.dp)
             .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -125,7 +130,7 @@ fun Signupscreen(navController: NavController){
             Spacer(modifier = Modifier.height(35.dp))
             Column (modifier = Modifier
 
-                .background(brush = upperbrush, shape = RoundedCornerShape(10.dp))
+                .background(brush = middlebrush, shape = RoundedCornerShape(10.dp))
                 .height(420.dp)
 
                 .width(350.dp),
